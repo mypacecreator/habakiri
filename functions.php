@@ -51,6 +51,9 @@ class Habakiri_Base_Functions {
 			'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'
 		) );
 
+		// WordPress 6.8.2 compatibility - add responsive embeds support
+		add_theme_support( 'responsive-embeds' );
+
 		$custom_background_defaults = array();
 		add_theme_support(
 			'custom-background',
