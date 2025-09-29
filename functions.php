@@ -21,11 +21,11 @@ add_action( 'after_setup_theme', 'habakiri_parent_theme_setup', 99999 );
 
 /**
  * Name       : Habakiri_Base_Functions
- * Version    : 1.4.0
+ * Version    : 1.4.1
  * Author     : inc2734
  * Author URI : http://2inc.org
  * Created    : April 17, 2015
- * Modified   : October 24, 2015
+ * Modified   : September 29, 2024
  * License    : GPLv2 or later
  * License URI: license.txt
  */
@@ -36,7 +36,9 @@ class Habakiri_Base_Functions {
 	 */
 	public function __construct() {
 		global $content_width;
-		if ( !isset( $content_width ) ) $content_width = 1140;
+		if ( !isset( $content_width ) ) {
+			$content_width = 1140;
+		}
 		load_theme_textdomain( 'habakiri', get_template_directory() . '/languages' );
 
 		add_editor_style( array(
