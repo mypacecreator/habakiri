@@ -565,7 +565,7 @@ class Habakiri_Base_Functions {
 	 */
 	public static function get_the_taxonomies( $post_id = null ) {
 		$post_type_object = get_post_type_object( get_post_type( $post_id ) );
-		if ( !empty( $post_type_object->taxonomies ) ) {
+		if ( $post_type_object && !empty( $post_type_object->taxonomies ) ) {
 			return $post_type_object->taxonomies;
 		}
 		return array();

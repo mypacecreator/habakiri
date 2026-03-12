@@ -45,7 +45,7 @@ if ( post_password_required() ) {
 
 		<?php if ( comments_open() ) : ?>
 		<div id="respond" class="comments__respond">
-			<?php if ( get_option( 'comment_registration' ) && !$user_ID ) : ?>
+			<?php if ( get_option( 'comment_registration' ) && !get_current_user_id() ) : ?>
 			<p>
 				<?php
 				printf(

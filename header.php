@@ -21,6 +21,7 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 <?php do_action( 'habakiri_before_container' ); ?>
 <div id="container">
 	<?php
