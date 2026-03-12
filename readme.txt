@@ -2,9 +2,10 @@
 Contributors: inc2734, shinichin, ishidaweb, mignonstyle, tkc49, mekemoke
 Donate link: http://www.amazon.co.jp/registry/wishlist/39ANKRNSTNW40
 Tags: white, fixed-layout, fluid-layout, responsive-layout, one-column, two-columns, left-sidebar, right-sidebar, editor-style, sticky-post, microformats, featured-images, custom-colors, custom-menu, custom-background, custom-header, custom-colors
-Requires at least: 4.1
-Tested up to: 4.7.0
-Stable tag: 2.5.2
+Requires at least: 6.0
+Requires PHP: 8.0
+Tested up to: 7.0
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: license.txt
 

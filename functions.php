@@ -21,11 +21,11 @@ add_action( 'after_setup_theme', 'habakiri_parent_theme_setup', 99999 );
 
 /**
  * Name       : Habakiri_Base_Functions
- * Version    : 1.4.1
+ * Version    : 1.5.0
  * Author     : inc2734
  * Author URI : http://2inc.org
  * Created    : April 17, 2015
- * Modified   : September 29, 2024
+ * Modified   : March 12, 2026
  * License    : GPLv2 or later
  * License URI: license.txt
  */
@@ -48,7 +48,7 @@ class Habakiri_Base_Functions {
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'html5', array(
-			'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'
+			'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script',
 		) );
 
 		// WordPress 6.8.2 compatibility - add responsive embeds support
@@ -134,7 +134,6 @@ class Habakiri_Base_Functions {
 	 * Register menus
 	 */
 	protected function register_nav_menus() {
-		add_theme_support( 'menu' );
 		register_nav_menus( array(
 			'global-nav' => __( 'Global Navigation', 'habakiri' ),
 			'social-nav' => __( 'Social Navigation', 'habakiri' ),
@@ -306,7 +305,7 @@ class Habakiri_Base_Functions {
 			get_template(),
 			$url . '/style.min.css',
 			array( $assets_name ),
-			date( 'YmdHis', filemtime( get_stylesheet_directory() . '/style.css' ) )
+			wp_date( 'YmdHis', filemtime( get_stylesheet_directory() . '/style.css' ) )
 		);
 
 		if ( is_child_theme() ) {
@@ -314,7 +313,7 @@ class Habakiri_Base_Functions {
 				get_stylesheet(),
 				get_stylesheet_uri(),
 				array( $assets_name ),
-				date( 'YmdHis', filemtime( get_stylesheet_directory() . '/style.css' ) )
+				wp_date( 'YmdHis', filemtime( get_stylesheet_directory() . '/style.css' ) )
 			);
 		}
 
