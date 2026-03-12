@@ -177,14 +177,21 @@ class Habakiri_Breadcrumbs {
 	protected function set_for_tax() {
 		$taxonomy = get_query_var( 'taxonomy' );
 		$term = get_term_by( 'slug', get_query_var( 'term' ), $taxonomy );
+		if ( ! $term ) {
+			return;
+		}
 
 		$taxonomy_objects = get_taxonomy( $taxonomy );
-		$post_types = $taxonomy_objects->object_type;
-		$post_type = array_shift( $post_types );
-		if ( $post_type ) {
-			$post_type_object = get_post_type_object( $post_type );
-			$label = $post_type_object->labels->singular_name;
-			$this->set( $label, $this->get_post_type_archive_link( $post_type ) );
+		if ( $taxonomy_objects ) {
+			$post_types = $taxonomy_objects->object_type;
+			$post_type = array_shift( $post_types );
+			if ( $post_type ) {
+				$post_type_object = get_post_type_object( $post_type );
+				if ( $post_type_object ) {
+					$label = $post_type_object->labels->singular_name;
+					$this->set( $label, $this->get_post_type_archive_link( $post_type ) );
+				}
+			}
 		}
 
 		if ( is_taxonomy_hierarchical( $taxonomy ) && $term->parent ) {
@@ -215,8 +222,10 @@ class Habakiri_Breadcrumbs {
 		$post_type = $this->get_post_type();
 		if ( $post_type && $post_type !== 'post' ) {
 			$post_type_object = get_post_type_object( $post_type );
-			$label = $post_type_object->labels->singular_name;
-			$this->set( $label );
+			if ( $post_type_object ) {
+				$label = $post_type_object->labels->singular_name;
+				$this->set( $label );
+			}
 		}
 	}
 
@@ -227,17 +236,19 @@ class Habakiri_Breadcrumbs {
 		$post_type = $this->get_post_type();
 		if ( $post_type && $post_type !== 'post' ) {
 			$post_type_object = get_post_type_object( $post_type );
-			$label = $post_type_object->labels->singular_name;
-			$this->set( $label, $this->get_post_type_archive_link( $post_type ) );
+			if ( $post_type_object ) {
+				$label = $post_type_object->labels->singular_name;
+				$this->set( $label, $this->get_post_type_archive_link( $post_type ) );
 
-			$taxonomies = $post_type_object->taxonomies;
-			if ( $taxonomies ) {
-				$taxonomy = array_shift( $taxonomies );
-				$terms    = get_the_terms( get_the_ID(), $taxonomy );
-				if ( $terms ) {
-					$term = array_shift( $terms );
-					$this->set_ancestors( $term->term_id, $taxonomy );
-					$this->set( $term->name, get_term_link( $term ) );
+				$taxonomies = $post_type_object->taxonomies;
+				if ( $taxonomies ) {
+					$taxonomy = array_shift( $taxonomies );
+					$terms    = get_the_terms( get_the_ID(), $taxonomy );
+					if ( $terms ) {
+						$term = array_shift( $terms );
+						$this->set_ancestors( $term->term_id, $taxonomy );
+						$this->set( $term->name, get_term_link( $term ) );
+					}
 				}
 			}
 		}
